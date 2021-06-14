@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:chipStrokeWidth="1dp"
+    android:checkable="true"
+    android:clickable="true"
+    app:checkedIcon="@null"
+    app:checkedIconVisible="false"
+    android:focusable="true"
+    android:textColor="@color/black"
+    app:chipStrokeColor="@android:color/black"
+    app:chipBackgroundColor="@color/white"
+    android:layout_height="wrap_content"
+    android:theme="@style/Theme.MaterialComponents.Light" />
+

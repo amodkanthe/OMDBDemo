@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">OMDBDemo</string>
+    <string name="plot">Plot</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_imdb">Search IMDb</string>
+    <string name="connection_error_try_again">Connection error try again</string>
+    <string name="try_again">Try Again</string>
+    <string name="search">Search</string>
+    <string name="favourites">Favourites</string>
+    <string name="no_result">No results found. Please try another search.</string>
+    <string name="imdb_rating">Imdb Rating</string>
+    <string name="director">Director</string>
+    <string name="Writer">Writer</string>
+    <string name="actors">Actors</string>
+</resources>
