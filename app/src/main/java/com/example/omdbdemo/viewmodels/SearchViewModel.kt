@@ -76,16 +76,20 @@ class SearchViewModel @Inject constructor(private val apiService: ApiService,pri
 
     fun insertSearch(searchItem : SearchItem?){
         viewModelScope.launch(exceptionHandlerDB) {
-            idAdded.value = searchItem?.imdbID
+          //  idAdded.value = searchItem?.imdbID
             roomDBRepository.insert(searchItem)
         }
     }
 
     fun deleteSearch(searchItem : SearchItem?){
         viewModelScope.launch(exceptionHandlerDB) {
-            idRemoved.value = searchItem?.imdbID
+            //idRemoved.value = searchItem?.imdbID
             roomDBRepository.delete(searchItem)
         }
+    }
+
+    fun updateSearchResult(result : SearchResult?){
+        searchResult.value = Resource.success(result)
     }
 
 

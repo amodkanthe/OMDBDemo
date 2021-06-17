@@ -98,32 +98,32 @@ class SearchMovieFragment : Fragment() {
     }
 
     fun observeHistory() {
-        searchViewModel._searchHistory.observe(viewLifecycleOwner, Observer {
-        })
-        searchViewModel.idAdded.observe(viewLifecycleOwner, Observer {
-            val adapter = binding.rvSearchResult.adapter as? SearchAdapter
-            val items = adapter?.items
-            val imdbId = it
-            val list = items?.filter {
-                it?.imdbID == imdbId
-            }
-            list?.forEach {
-                it?.isFav = true
-            }
-
-        })
-        searchViewModel.idRemoved.observe(viewLifecycleOwner, Observer {
-            val adapter = binding.rvSearchResult.adapter as? SearchAdapter
-            val items = adapter?.items
-            val imdbId = it
-            val list = items?.filter {
-                it?.imdbID == imdbId
-            }
-            list?.forEach {
-                it?.isFav = true
-            }
-
-        })
+//        searchViewModel._searchHistory.observe(viewLifecycleOwner, Observer {
+//        })
+//        searchViewModel.idAdded.observe(viewLifecycleOwner, Observer {
+//            val adapter = binding.rvSearchResult.adapter as? SearchAdapter
+//            val items = adapter?.items
+//            val imdbId = it
+//            val list = items?.filter {
+//                it?.imdbID == imdbId
+//            }
+//            list?.forEach {
+//                it?.isFav = true
+//            }
+//
+//        })
+//        searchViewModel.idRemoved.observe(viewLifecycleOwner, Observer {
+//            val adapter = binding.rvSearchResult.adapter as? SearchAdapter
+//            val items = adapter?.items
+//            val imdbId = it
+//            val list = items?.filter {
+//                it?.imdbID == imdbId
+//            }
+//            list?.forEach {
+//                it?.isFav = true
+//            }
+//
+//        })
     }
 
     private fun setUpObserver() {
@@ -137,13 +137,21 @@ class SearchMovieFragment : Fragment() {
                             R.id.container,
                             MovieDetailFragment.newInstance(it?.imdbID ?: "")
                         )?.addToBackStack("")?.commit()
-                    }, listenerFav = { it1 ->
-                        it1?.isFav = !(it1?.isFav ?: false)
-                        if (it1?.isFav ?: false) {
-                            searchViewModel.insertSearch(it1)
+                    }, listenerFav = { item, index ->
+                        println("amod-----------0"+item?.isFav)
+                        item?.isFav = !(item?.isFav ?: false)
+                        println("amod-----------1"+item?.isFav)
+
+                        index?.let { it1 ->
+                            it?.data?.search?.set(it1, item)
+                            searchViewModel.updateSearchResult(it.data)
+                        };
+                        if (item?.isFav ?: false) {
+                            searchViewModel.insertSearch(item)
                         } else {
-                            searchViewModel.deleteSearch(it1)
+                            searchViewModel.deleteSearch(item)
                         }
+
                     })
                     if (it?.data?.search?.count() ?: 0 <= 0) {
                         val snackbar = view?.let { it1 ->

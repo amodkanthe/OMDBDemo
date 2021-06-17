@@ -9,9 +9,9 @@ import com.example.omdbdemo.data.setSendState
 import com.example.omdbdemo.databinding.SearchResultRowLayoutBinding
 
 class SearchAdapter(
-    var items: List<SearchItem?>?,
+    var items: MutableList<SearchItem?>?,
     private val listener: ((item: SearchItem?) -> Unit)?,
-    private val listenerFav: ((item: SearchItem?) -> Unit)?
+    private val listenerFav: ((item: SearchItem?,index : Int?) -> Unit)?
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -38,12 +38,13 @@ class SearchAdapter(
         fun bind(model: SearchItem?) {
             binding?.model = model
             binding?.ivfav.setOnClickListener(View.OnClickListener {
-                this@SearchAdapter.listenerFav?.invoke(this@SearchAdapter.items?.get(adapterPosition))
+                this@SearchAdapter.listenerFav?.invoke(this@SearchAdapter.items?.get(adapterPosition),adapterPosition)
                 notifyItemChanged(adapterPosition)
             })
             //binding.ivfav.setImageResource((items?.get(adapterPosition)?.isFav ?: false) ? R.dr)
             binding?.root.setOnClickListener(View.OnClickListener {
                 this@SearchAdapter.listener?.invoke(this@SearchAdapter.items?.get(adapterPosition))
+               // notifyItemChanged(adapterPosition)
 
             })
            // binding?.ivfav.setIma

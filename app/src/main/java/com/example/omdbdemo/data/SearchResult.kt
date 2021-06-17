@@ -20,7 +20,7 @@ data class SearchResult(
     val totalResults: String? = null,
 
     @field:SerializedName("Search")
-    val search: List<SearchItem?>? = null
+    var search: MutableList<SearchItem?>? = mutableListOf()
 )
 
 @Entity(tableName = "searchitem")

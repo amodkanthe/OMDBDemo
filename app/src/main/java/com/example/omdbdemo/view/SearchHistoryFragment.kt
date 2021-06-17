@@ -51,8 +51,10 @@ class SearchHistoryFragment : Fragment() {
     fun observeResult() {
         searchViewModel._searchHistory.observe(viewLifecycleOwner, Observer {
             binding.rvHistory.adapter = SearchAdapter(it, listener = {
-                activity?.supportFragmentManager?.beginTransaction()?.add(R.id.container,MovieDetailFragment.newInstance(it?.imdbID ?: ""))?.addToBackStack("")?.commit()
-            }, listenerFav = {
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.add(R.id.container, MovieDetailFragment.newInstance(it?.imdbID ?: ""))
+                    ?.addToBackStack("")?.commit()
+            }, listenerFav = { it, index ->
                 searchViewModel.deleteSearch(searchItem = it)
             }
             )
